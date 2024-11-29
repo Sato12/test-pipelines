@@ -1,5 +1,6 @@
 import sys
 import json
+import os
 
 if len(sys.argv) not in [3, 4]:
     print("Usage: python3 ValidateDuplications.py path_items pk sk")
@@ -9,6 +10,9 @@ pathItems = sys.argv[1]
 pk = sys.argv[2]
 sk = sys.argv[3] if len(sys.argv) == 4 else None
 
+current_directory = os.getcwd()
+print('Current path')
+print(current_directory)
 f = open("../../../../" + pathItems)
 items = json.load(f)
 
