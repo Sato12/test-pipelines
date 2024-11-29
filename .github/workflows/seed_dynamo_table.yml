@@ -19,6 +19,10 @@ on:
         description: "Path of JSON Items"
         required: true
         type: string
+      environment:
+        description: "environment"
+        required: true
+        type: string
     secrets:
       AWS_ACCESS_KEY_ID:
         required: true
@@ -28,10 +32,11 @@ on:
 jobs:
   put-dyn:
     runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
     env:
       repo-name: Sato12/test-pipelines
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Clone the pipeline repository
         uses: actions/checkout@v3
         with:
