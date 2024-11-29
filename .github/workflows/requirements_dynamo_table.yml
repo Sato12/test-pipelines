@@ -38,6 +38,7 @@ jobs:
           PRIM_KEY: ${{ inputs.dyn_pk }}
           SORT_KEY: ${{ inputs.dyn_sk }}
         run: |
+          ls
           source venv/bin/activate
           python3 src/dynamo/seedTable/validateDuplicates.py ${PATH_ITEMS} ${PRIM_KEY} ${SORT_KEY}
           echo success
