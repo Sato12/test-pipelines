@@ -9,7 +9,7 @@ pathItems = sys.argv[1]
 pk = sys.argv[2]
 sk = sys.argv[3] if len(sys.argv) == 4 else None
 
-f = open(pathItems)
+f = open("../../../../" + pathItems)
 items = json.load(f)
 
 print(f"Validating items for pk -> {pk}, sk -> {sk}, from -> '{pathItems}'")
