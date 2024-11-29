@@ -44,11 +44,11 @@ jobs:
           PATH_ITEMS: ${{ inputs.dyn_items_path }}
           PRIM_KEY: ${{ inputs.dyn_pk }}
           SORT_KEY: ${{ inputs.dyn_sk }}
+          PATH_VALIDATION: ${{ env.repo-name }}/src/dynamo/put_table/validate_duplicates.py
         run: |
           ls -R ${{ env.repo-name }}
-          echo XXXXXXX
           ls -R src
           pwd
           source venv/bin/activate
-          python3 ${{ env.repo-name }}/src/dynamo/put_table/validate_duplicates.py ${PATH_ITEMS} ${PRIM_KEY} ${SORT_KEY}
+          python3 ${PATH_VALIDATION} ${PATH_ITEMS} ${PRIM_KEY} ${SORT_KEY}
           echo success
