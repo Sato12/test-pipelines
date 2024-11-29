@@ -21,6 +21,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Clone the pipeline repository
+        uses: actions/checkout@v3
+        with:
+          repository: Sato12/test-pipelines # Replace with your actual repository
+          path: test-pipelines # Specify a folder where the repo will be cloned
       - name: Use Python3.9
         uses: actions/setup-python@v2
         with:
@@ -40,5 +45,5 @@ jobs:
         run: |
           ls -R src
           source venv/bin/activate
-          python3 src/dynamo/seedTable/validateDuplicates.py ${PATH_ITEMS} ${PRIM_KEY} ${SORT_KEY}
+          python3 test-pipelines/src/dynamo/seedTable/validateDuplicates.py ${PATH_ITEMS} ${PRIM_KEY} ${SORT_KEY}
           echo success
