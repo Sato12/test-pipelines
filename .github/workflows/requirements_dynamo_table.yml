@@ -43,7 +43,7 @@ jobs:
           PRIM_KEY: ${{ inputs.dyn_pk }}
           SORT_KEY: ${{ inputs.dyn_sk }}
         run: |
-          ls
+          ls -R test-pipelines
           ls -R src
           pwd
           source venv/bin/activate
