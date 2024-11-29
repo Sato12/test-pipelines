@@ -13,7 +13,7 @@ sk = sys.argv[3] if len(sys.argv) == 4 else None
 current_directory = os.getcwd()
 print('Current path')
 print(current_directory)
-f = open("../../../../" + pathItems)
+f = open("../" + pathItems)
 items = json.load(f)
 
 print(f"Validating items for pk -> {pk}, sk -> {sk}, from -> '{pathItems}'")
