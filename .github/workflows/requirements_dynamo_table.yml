@@ -15,11 +15,6 @@ on:
         description: "Path of JSON Items"
         required: true
         type: string
-    secrets:
-      AWS_ACCESS_KEY_ID:
-        required: true
-      AWS_SECRET_ACCESS_KEY:
-        required: true
 
 jobs:
   put-dyn:
@@ -45,3 +40,4 @@ jobs:
         run: |
           source venv/bin/activate
           python3 src/dynamo/seedTable/validateDuplicates.py ${PATH_ITEMS} ${PRIM_KEY} ${SORT_KEY}
+          echo success
