@@ -44,6 +44,7 @@ jobs:
           SORT_KEY: ${{ inputs.dyn_sk }}
         run: |
           ls -R ${{ github.repository }}
+          echo XXXXXXX
           ls -R src
           pwd
           source venv/bin/activate
