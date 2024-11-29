@@ -47,5 +47,5 @@ jobs:
           ls -R src
           pwd
           source venv/bin/activate
-          python3 ${{ github.repository }}/src/dynamo/put_items/validate_duplicates.py ${PATH_ITEMS} ${PRIM_KEY} ${SORT_KEY}
+          python3 ${{ github.repository }}/src/dynamo/put_table/validate_duplicates.py ${PATH_ITEMS} ${PRIM_KEY} ${SORT_KEY}
           echo success
