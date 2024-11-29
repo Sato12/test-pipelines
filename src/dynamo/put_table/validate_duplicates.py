@@ -11,8 +11,11 @@ pk = sys.argv[2]
 sk = sys.argv[3] if len(sys.argv) == 4 else None
 
 current_directory = os.getcwd()
+files_and_folders = os.listdir(current_directory)
 print('Current path')
 print(current_directory)
+print(files_and_folders)
+
 f = open("../" + pathItems)
 items = json.load(f)
 
