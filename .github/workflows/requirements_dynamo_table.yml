@@ -20,7 +20,7 @@ jobs:
   put-dyn:
     runs-on: ubuntu-latest
     env:
-      repo-name: ${{ github.event.repository }}
+      repo-name: Sato12/test-pipelines
     steps:
       - uses: actions/checkout@v3
       - name: Clone the pipeline repository
