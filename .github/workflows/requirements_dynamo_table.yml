@@ -20,7 +20,7 @@ jobs:
   put-dyn:
     runs-on: ubuntu-latest
     env:
-      repo-name: ${{ github.repository }}
+      repo-name: ${{ github.event.repository }}
     steps:
       - uses: actions/checkout@v3
       - name: Clone the pipeline repository
