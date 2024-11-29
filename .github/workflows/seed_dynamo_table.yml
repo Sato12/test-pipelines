@@ -63,7 +63,7 @@ jobs:
       - name: run dynamo script ${{ inputs.dyn_tbl_name }}
         env:
           TABLE_NAME: ${{ inputs.dyn_tbl_name }}
-          PATH_SCRIPT: ${{ env.repo-name }}/src/dynamo/put_table/validate_duplicates.py
+          PATH_SCRIPT: ${{ env.repo-name }}/src/dynamo/put_table/put_items.py
           PATH_ITEMS: ${{ inputs.dyn_items_path }}
           PRIM_KEY: ${{ inputs.dyn_pk }}
           SORT_KEY: ${{ inputs.dyn_sk }}
