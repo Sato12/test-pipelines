@@ -16,7 +16,7 @@ print('Current path')
 print(current_directory)
 print(files_and_folders)
 
-f = open("../" + pathItems)
+f = open("./" + pathItems)
 items = json.load(f)
 
 print(f"Validating items for pk -> {pk}, sk -> {sk}, from -> '{pathItems}'")
