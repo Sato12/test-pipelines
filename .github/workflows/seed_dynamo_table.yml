@@ -1,0 +1,77 @@
+name: Insert Dynamo Items
+
+on:
+  workflow_call:
+    inputs:
+      dyn_tbl_name:
+        description: "Name of dynamo table"
+        required: true
+        type: string
+      dyn_pk:
+        description: "primary key of table"
+        required: true
+        type: string
+      dyn_sk:
+        description: "sort key of table"
+        required: false
+        type: string
+      dyn_script_path:
+        description: "Path of script to put Items"
+        required: true
+        type: string
+      dyn_validate_path:
+        description: "Name of dynamo validations"
+        required: true
+        type: string
+      dyn_items_path:
+        description: "Path of JSON Items"
+        required: true
+        type: string
+    secrets:
+      AWS_ACCESS_KEY_ID:
+        required: true
+      AWS_SECRET_ACCESS_KEY:
+        required: true
+
+jobs:
+  put-dyn:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Python3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install Dependencies
+        run: |
+          if [ ! -d "venv" ]; then
+            python3 -m venv venv
+          fi
+          . venv/bin/activate
+          source venv/bin/activate
+          python3 -m pip install boto3
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - name: validate file ${{ inputs.dyn_script_path }}
+        env:
+          PATH_VALIDATION_SCRIPT: ${{ inputs.dyn_validate_path }}
+          PATH_ITEMS: ${{ inputs.dyn_items_path }}
+          PRIM_KEY: ${{ inputs.dyn_pk }}
+          SORT_KEY: ${{ inputs.dyn_sk }}
+        run: |
+          source venv/bin/activate
+          python3 ${PATH_VALIDATION_SCRIPT} ${PATH_ITEMS} ${PRIM_KEY} ${SORT_KEY}
+      - name: run dynamo script ${{ inputs.dyn_tbl_name }}
+        env:
+          TABLE_NAME: ${{ inputs.dyn_tbl_name }}
+          PATH_SCRIPT: ${{ inputs.dyn_script_path }}
+          PATH_ITEMS: ${{ inputs.dyn_items_path }}
+          PRIM_KEY: ${{ inputs.dyn_pk }}
+          SORT_KEY: ${{ inputs.dyn_sk }}
+        run: |
+          source venv/bin/activate
+          python3 ${PATH_SCRIPT} ${TABLE_NAME} ${PATH_ITEMS} ${PRIM_KEY} ${SORT_KEY}
