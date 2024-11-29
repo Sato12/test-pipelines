@@ -19,13 +19,15 @@ on:
 jobs:
   put-dyn:
     runs-on: ubuntu-latest
+    env:
+      repo-name: ${{ github.repository }}
     steps:
       - uses: actions/checkout@v3
       - name: Clone the pipeline repository
         uses: actions/checkout@v3
         with:
-          repository: ${{ github.repository }}
-          path: opf-pipeline-repo
+          repository: ${{ env.repo-name }}
+          path: ${{ env.repo-name }}
       - name: Use Python3.9
         uses: actions/setup-python@v2
         with:
@@ -43,10 +45,10 @@ jobs:
           PRIM_KEY: ${{ inputs.dyn_pk }}
           SORT_KEY: ${{ inputs.dyn_sk }}
         run: |
-          ls -R opf-pipeline-repo
+          ls -R ${{ env.repo-name }}
           echo XXXXXXX
           ls -R src
           pwd
           source venv/bin/activate
-          python3 opf-pipeline-repo/src/dynamo/put_table/validate_duplicates.py ${PATH_ITEMS} ${PRIM_KEY} ${SORT_KEY}
+          python3 ${{ env.repo-name }}/src/dynamo/put_table/validate_duplicates.py ${PATH_ITEMS} ${PRIM_KEY} ${SORT_KEY}
           echo success
